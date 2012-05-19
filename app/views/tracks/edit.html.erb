@@ -1,8 +1,8 @@
 <% content_for :footer_script do %>
 <% if Rails.env.development? %>
-<script src="http://mother-speak-nodejs.herokuapp.com/socket.io/socket.io.js"></script>
-<% else %>
 <script src="http://<%= request.host %>:8080/socket.io/socket.io.js"></script>
+<% else %>
+<script src="http://mother-speak-nodejs.herokuapp.com/socket.io/socket.io.js"></script>
 <% end %>
 
 <script>
