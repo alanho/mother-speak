@@ -1,1 +1,11 @@
-hello world
+<div class="row" style="text-align: center;">
+<%= form_tag(search_events_path, :method => "get") do %>
+  <%= label_tag(:hashtag, '#') %>
+  <%= text_field_tag(:hashtag) %>
+  <%= submit_tag("Search") %>
+<% end %>
+</div>
+
+<div class="row" style="text-align: center;">
+	<%= link_to "Near by", nearby_events_path, :id => "btnNearBy", :class => "btn btn-primary span12", :style => "display: block;" %>
+</div>

@@ -1,4 +1,13 @@
 MotherSpeak::Application.routes.draw do
+  resources :events do 
+    resources :tracks
+    
+    collection do 
+      get 'nearby'
+      get 'search'
+    end
+  end
+
   root :to => 'pages#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
