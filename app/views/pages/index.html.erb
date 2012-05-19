@@ -1,16 +1,12 @@
-<%= form_tag(search_events_path, :method => "get", :class => "form-horizontal") do %>
-	<div class="input-prepend">
-		<span class="add-on">#</span>
-  	<%= text_field_tag(:hashtag, nil, :class => "span11") %>
-	</div>
+<%= form_tag(search_events_path, :method => "get", :class => "form-horizontal", :syle => "text-align: center;") do %>
+  <%= text_field_tag(:hashtag, nil, :class => "span11", :placeholder => '#hashtag', :style => "margin: 0 auto;") %>
 <% end %>
-</div>
 <div class="row" style="text-align: center;">
-	<%= link_to "Search", '#', :id => "btnSearch", :class => "btn btn-primary span12", :style => "display: block;" %>
+	<%= link_to "Search", '#', :id => "btnSearch", :class => "btn btn-primary span11", :style => "display: block;" %>
 </div>
 
 <hr/>
 
 <div class="row" style="text-align: center;">
-	<%= link_to "Search Near by", nearby_events_path, :id => "btnNearBy", :class => "btn btn-primary span12", :style => "display: block;" %>
+	<%= link_to "Search Near by", nearby_events_path, :id => "btnNearBy", :class => "btn btn-primary span11", :style => "display: block;" %>
 </div>

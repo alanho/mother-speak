@@ -33,5 +33,9 @@ $(function(){
 		} else {
 		  alert("Yike! Looks like you're using a unsupported browser!");
 		}
-	})
+	});
+	
+	$("#btnSearch").on("click", function(){
+		$("form").submit();
+	});
 })
