@@ -14,6 +14,7 @@ $(function(){
 	<% end %>
   socket.on('connect', function () {
 		$("#status").text("Connected!")
+		$("#led").css('background-color', 'green');
 		$("#btnSubmit").on("click", function(){
 			socket.emit("in_message", {
 				message: $("#inputArea").val(),
@@ -36,8 +37,6 @@ You're translating <strong><%= @event.name %></strong> in <strong><%= @track.nam
 <div class="row">
 	<%= link_to "Send", "#", :id => "btnSubmit", :class => "btn btn-primary span12", :style => "display: block;" %>
 </div>
-<div id="status" style="color: #ddd;">Loading.....</div>
-
-
+<div style="color: #ddd;"><span style="background: red;" id="led">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;<span id="status">Loading.....</span></div>
 
 <%= render "topnav" %>

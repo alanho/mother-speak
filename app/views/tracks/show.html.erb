@@ -14,10 +14,16 @@ $(function(){
 	<% end %>
 	socket.on('connect', function (data) {
 		$("#status").html("Connected!");
+		$("#led").css('background-color', 'green');
 		socket.emit("history", { track_id: <%= @track.id %>})
 	});
   socket.on('feeds_<%= @track.id %>', function (data) {
-		var currentTime = new Date();
+    console.log(data);
+    if (data.created_at) {
+      var currentTime = new Date(Date.parse(data.created_at));
+    } else {
+      var currentTime = new Date();
+    }
 		var timestamp = (currentTime.getHours() < 10 ? "0" : "") + currentTime.getHours();
 		timestamp += ":"+(currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
 		timestamp += ":"+(currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
@@ -29,6 +35,10 @@ $(function(){
 		});
     //socket.emit('my other event', { my: 'data' });
   });
+  var original_height = $("#feeds").height();
+  
+  $("#feeds").height(  (screen.availHeight - $("body").height()) * 0.4 +  original_height   );
+  console.log((screen.availHeight - $("body").height()) * 0.5 +  original_height );
 });
 </script>
 <% end %>
@@ -38,7 +48,6 @@ You're viewing <strong><%= @event.name %></strong> in <strong><%= @track.name %>
 <pre id="feeds" class="well" style="height: 200px; overflow-y: scroll;">
 </pre>
 
-<div id="status" style="color: #ddd;">Loading.....</div>
-
+<div style="color: #ddd;"><span style="background: red;" id="led">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;<span id="status">Loading.....</span></div>
 
 <%= render "topnav" %>
