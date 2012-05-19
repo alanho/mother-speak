@@ -1,8 +1,0 @@
-<div class="row" style="text-align: center;">
-	<h1><%= @event.name %></h1>
-</div>
-<% @event.tracks.each do |track| %>
-<div class="row">
-	<a class="btn btn-primary" class="span12" style="display: block;"><%= track.name %></a>
-</div>
-<% end %>

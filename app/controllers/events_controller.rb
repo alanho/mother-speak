@@ -24,7 +24,10 @@ class EventsController < ApplicationController
   def search
     @event = Event.find_by_hashtag(params[:hashtag])
     
-    redirect_to event_path(@event) if @event
-    # respond_with(@event)
+    if @event
+      redirect_to event_path(@event) 
+    else
+      redirect_to root_path, :error => "Event not found"
+    end
   end
 end

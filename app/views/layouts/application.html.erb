@@ -41,13 +41,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">MotherSpeak</a>
+          <a class="brand" href="/">MotherSpeak</a>
           <div class="container nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Events", '#'  %></li>
-              <li><%= link_to "Link2", '#'  %></li>
-              <li><%= link_to "Link3", '#'  %></li>
-            </ul>
+						<%= yield(:topnav) %>
           </div><!--/.nav-collapse -->
         </div>
       </div>

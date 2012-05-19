@@ -1,8 +1,15 @@
 <div class="row" style="text-align: center;">
 	<h1><%= @event.name %></h1>
 </div>
+<hr />
 <% @event.tracks.each do |track| %>
 <div class="row">
-	<a class="btn btn-primary" class="span12" style="display: block;"><%= track.name %></a>
+	<%= link_to track.name, event_track_path(@event, track), :class => "btn btn-primary span12", :style => "display: block;" %>
+</div>
+<div class="row">
+	&nbsp;
 </div>
 <% end %>
+
+<hr />
+<%= render "topnav" %>

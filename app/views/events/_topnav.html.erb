@@ -1,0 +1,8 @@
+<% content_for :topnav do %>
+<ul class="nav">
+  <li><%= link_to @event.name, event_path(@event)  %></li>
+	<% @event.tracks.each do |track| %>
+  	<li><%= link_to "&nbsp;&nbsp;&nbsp;&nbsp;".html_safe + track.name, event_track_path(@event, track)  %></li>
+  <% end %>
+</ul>
+<% end %>

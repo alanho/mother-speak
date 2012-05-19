@@ -1,0 +1,43 @@
+<% content_for :footer_script do %>
+<% if Rails.env.development? %>
+<script src="http://mother-speak-nodejs.herokuapp.com/socket.io/socket.io.js"></script>
+<% else %>
+<script src="http://<%= request.host %>:8080/socket.io/socket.io.js"></script>
+<% end %>
+
+<script>
+$(function(){
+	<% if Rails.env.development? %>
+  var socket = io.connect('http://<%= request.host %>:8080');
+	<% else %>
+	var socket = io.connect('http://mother-speak-nodejs.herokuapp.com:80');
+	<% end %>
+	socket.on('connect', function (data) {
+		$("#status").html("Connected!");
+	});
+  socket.on('feeds_<%= @track.id %>', function (data) {
+		var currentTime = new Date();
+		var timestamp = (currentTime.getHours() < 10 ? "0" : "") + currentTime.getHours();
+		timestamp += ":"+(currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
+		timestamp += ":"+(currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
+		
+		$("#feeds").prepend("[" + timestamp + "] " + data.message + "\n")
+		
+		socket.on("disconnect",function(){
+			$("#status").html("disconnected");
+		});
+    //socket.emit('my other event', { my: 'data' });
+  });
+});
+</script>
+<% end %>
+<div class="row">
+You're viewing <strong><%= @event.name %></strong> in <strong><%= @track.name %></strong> channel
+</div>
+<pre id="feeds" class="well" style="height: 200px; overflow-y: scroll;">
+</pre>
+
+<div id="status" style="color: #ddd;">Loading.....</div>
+
+
+<%= render "topnav" %>

@@ -1,6 +1,6 @@
 MotherSpeak::Application.routes.draw do
-  resources :events do 
-    resources :tracks
+  resources :events, :only => [:index, :show] do 
+    resources :tracks, :only => [:show, :edit]
     
     collection do 
       get 'nearby'

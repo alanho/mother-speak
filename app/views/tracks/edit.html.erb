@@ -1,0 +1,43 @@
+<% content_for :footer_script do %>
+<% if Rails.env.development? %>
+<script src="http://mother-speak-nodejs.herokuapp.com/socket.io/socket.io.js"></script>
+<% else %>
+<script src="http://<%= request.host %>:8080/socket.io/socket.io.js"></script>
+<% end %>
+
+<script>
+$(function(){
+	<% if Rails.env.development? %>
+  var socket = io.connect('http://<%= request.host %>:8080');
+	<% else %>
+	var socket = io.connect('http://mother-speak-nodejs.herokuapp.com:80');
+	<% end %>
+  socket.on('connect', function () {
+		$("#status").text("Connected!")
+		$("#btnSubmit").on("click", function(){
+			socket.emit("in_message", {
+				message: $("#inputArea").val(),
+				track_id: <%= @track.id %>,
+				token: "<%= @track.token %>"
+			});
+			
+			$("#inputArea").val("");
+			return false;
+		});
+	});
+});
+</script>
+<% end %>
+<div class="row">
+You're translating <strong><%= @event.name %></strong> in <strong><%= @track.name %></strong> channel
+</div>
+<textarea id="inputArea" class="span12" style="height: 100px;">
+</textarea>
+<div class="row">
+	<%= link_to "Send", "#", :id => "btnSubmit", :class => "btn btn-primary span12", :style => "display: block;" %>
+</div>
+<div id="status" style="color: #ddd;">Loading.....</div>
+
+
+
+<%= render "topnav" %>
