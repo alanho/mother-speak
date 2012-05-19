@@ -14,6 +14,7 @@ $(function(){
 	<% end %>
 	socket.on('connect', function (data) {
 		$("#status").html("Connected!");
+		socket.emit("history", { track_id: <%= @track.id %>})
 	});
   socket.on('feeds_<%= @track.id %>', function (data) {
 		var currentTime = new Date();
@@ -21,7 +22,7 @@ $(function(){
 		timestamp += ":"+(currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
 		timestamp += ":"+(currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
 		
-		$("#feeds").prepend("[" + timestamp + "] " + data.message + "\n")
+		$("#feeds").prepend("<strong>[" + timestamp + "]</strong> " + data.message + "\n\n")
 		
 		socket.on("disconnect",function(){
 			$("#status").html("disconnected");

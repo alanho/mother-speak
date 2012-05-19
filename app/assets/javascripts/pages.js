@@ -33,9 +33,11 @@ $(function(){
 		} else {
 		  alert("Yike! Looks like you're using a unsupported browser!");
 		}
+		return false;
 	});
 	
 	$("#btnSearch").on("click", function(){
 		$("form").submit();
+		return false;
 	});
 })

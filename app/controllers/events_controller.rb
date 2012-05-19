@@ -22,7 +22,7 @@ class EventsController < ApplicationController
   end
   
   def search
-    @event = Event.find_by_hashtag(params[:hashtag])
+    @event = Event.find_by_hashtag(params[:hashtag][/[^#]+$/])
     
     if @event
       redirect_to event_path(@event) 
